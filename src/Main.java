@@ -28,6 +28,8 @@ public class Main {
             }
         }
 
+        showGameBoard(gameBoard);
+
         // game is over, announcing draw or winner
         int status = status(gameBoard);
         if(status == 0) {
@@ -49,7 +51,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // 1. say which player is next
-        System.out.println("The next is: " + currentPlayer);
+        System.out.println("The next player is: " + currentPlayer);
 
         while(true) {
             // 2. ask for a line number
@@ -92,24 +94,23 @@ public class Main {
      * @return a new game board.
      */
     public static char[][] initialize ( ) {
-        char[][] gameBoard = {
+
+        return new char[][]{
                 { '-', '-', '-' },
                 { '-', '-', '-' },
                 { '-', '-', '-' }
         };
-
-        return gameBoard;
     }
 
     /**
      * executes one step in the game
      * @return true if step taken, false if not.
      */
-    public static boolean step (char M[][], int lin, int col, char gamer) {
+    public static boolean step (char[][] M, int lin, int col, char gamer) {
         // check if you can take this step
         // if you can, set the space to the current character and return true
         // if you cant, return false
-        if(M[lin][col] != '-') {
+        if(M[lin][col] == '-') {
             M[lin][col] = gamer;
             return true;
         }
@@ -125,7 +126,7 @@ public class Main {
      * 1 jogado O venceu;
      * 2 jogador X venceu;
      */
-    public static int status (char M[][]) {
+    public static int status (char[][] M) {
         // 1. check if a player has won (and which one) => return 1/2
         if(
                 // check first line (horizontally)
